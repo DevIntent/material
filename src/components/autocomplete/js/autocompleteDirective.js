@@ -357,7 +357,7 @@ function MdAutocomplete ($$mdSvgRegistry) {
                   ng-required="$mdAutocompleteCtrl.isRequired"\
                   ng-readonly="$mdAutocompleteCtrl.isReadonly"\
                   ng-minlength="inputMinlength"\
-                  ng-maxlength="inputMaxlength"\
+                  md-maxlength="{{inputMaxlength}}"\
                   ng-disabled="$mdAutocompleteCtrl.isDisabled"\
                   ng-model="$mdAutocompleteCtrl.scope.searchText"\
                   ng-model-options="{ allowInvalid: true }"\

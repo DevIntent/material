@@ -1,5 +1,5 @@
 describe('mdSidenav', function() {
-  beforeEach(module('material.components.sidenav'));
+  beforeEach(angular.mock.module('material.components.sidenav'));
 
   function setup(attrs, skipInitialDigest) {
     var el;

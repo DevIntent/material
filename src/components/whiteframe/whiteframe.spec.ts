@@ -1,6 +1,6 @@
 describe('mdWhiteframe directive', function() {
 
-  beforeEach(module('material.components.whiteframe'));
+  beforeEach(angular.mock.module('material.components.whiteframe'));
 
   function buildWhiteframe(elevation) {
     var element;

@@ -2,7 +2,7 @@ describe('mdListItem directive', function() {
   var attachedElements = [];
   var $compile, $rootScope;
 
-  beforeEach(module(
+  beforeEach(angular.mock.module(
     'material.components.list',
     'material.components.checkbox',
     'material.components.switch',

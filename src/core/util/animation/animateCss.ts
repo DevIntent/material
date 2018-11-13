@@ -6,7 +6,7 @@ if (angular.version.minor >= 4) {
 
   var forEach = angular.forEach;
 
-  var WEBKIT = angular.isDefined(document.documentElement.style.WebkitAppearance);
+  var WEBKIT = angular.isDefined(document.documentElement.style.webkitAppearance);
   var TRANSITION_PROP = WEBKIT ? 'WebkitTransition' : 'transition';
   var ANIMATION_PROP = WEBKIT ? 'WebkitAnimation' : 'animation';
   var PREFIX = WEBKIT ? '-webkit-' : '';
@@ -132,7 +132,7 @@ if (angular.version.minor >= 4) {
     };
 
     // Polyfill AnimateRunner.all which is used by input animations
-    AnimateRunner.all = function(runners, callback) {
+    (AnimateRunner as any).all = function(runners, callback) {
       var count = 0;
       var status = true;
       forEach(runners, function(runner) {

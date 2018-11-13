@@ -1,5 +1,5 @@
 describe('$mdCompiler service', function() {
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   function compile(options) {
     var compileData;
@@ -73,7 +73,7 @@ describe('$mdCompiler service', function() {
       var options;
 
       beforeEach(function() {
-        module(function($provide) {
+        angular.mock.module(function($provide) {
           $provide.constant('StrawberryColor', 'red');
         });
 
@@ -188,7 +188,7 @@ describe('$mdCompiler service', function() {
       var preAssignBindingsEnabledInAngularJS = angular.version.minor < 6;
 
       beforeEach(function() {
-        module(function($mdCompilerProvider) {
+        angular.mock.module(function($mdCompilerProvider) {
           // Don't set the value so that the default state can be tested.
           if (typeof realRespectPreAssignBindingsEnabled === 'boolean') {
             $mdCompilerProvider.respectPreAssignBindingsEnabled(realRespectPreAssignBindingsEnabled);
@@ -439,9 +439,9 @@ describe('$mdCompiler service', function() {
   describe('with respectPreAssignBindingsEnabled and not preAssignBindingsEnabled', function() {
     var $mdCompiler, pageScope, $rootScope;
 
-    beforeEach(module('material.core'));
+    beforeEach(angular.mock.module('material.core'));
 
-    beforeEach(module(function($mdCompilerProvider, $compileProvider) {
+    beforeEach(angular.mock.module(function($mdCompilerProvider, $compileProvider) {
       $mdCompilerProvider.respectPreAssignBindingsEnabled(true);
 
       // preAssignBindingsEnabled is removed in Angular 1.7, so we only explicitly turn it

@@ -8,7 +8,7 @@ describe('$mdThemingProvider', function() {
 
   beforeEach(function() {
 
-    module('material.core', function($provide) {
+    angular.mock.module('material.core', function($provide) {
       /**
        *  material-mocks.js clears the $MD_THEME_CSS for Karma testing performance
        *  performance optimizations. Here inject some length into our theme_css so that
@@ -20,7 +20,7 @@ describe('$mdThemingProvider', function() {
   });
 
   function setup() {
-    module('material.core', function($mdThemingProvider) {
+    angular.mock.module('material.core', function($mdThemingProvider) {
       themingProvider = $mdThemingProvider;
 
       testPalette = themingProvider._PALETTES.testPalette = themingProvider._PALETTES.otherTestPalette = {
@@ -417,7 +417,7 @@ describe('$mdThemingProvider', function() {
 
   describe('configuration', function () {
     beforeEach(function () {
-      module('material.core', function($mdThemingProvider) {
+      angular.mock.module('material.core', function($mdThemingProvider) {
             themingProvider = $mdThemingProvider;
       });
       startAngular();
@@ -456,14 +456,14 @@ describe('$mdThemingProvider', function() {
 
 describe('$mdThemeProvider with custom styles', function() {
   it('appends the custom styles to the end of the $MD_THEME_CSS string', function() {
-    module('material.core', function($mdThemingProvider) {
+    angular.mock.module('material.core', function($mdThemingProvider) {
       $mdThemingProvider.registerStyles('/*test*/');
       $mdThemingProvider.theme('register-custom-styles');
     });
 
     inject(function($MD_THEME_CSS) {
       // Verify that $MD_THEME_CSS is still set to '/**/' in the test environment.
-      // Check angular-material-mocks.js for $MD_THEME_CSS latest value if this test starts to fail.
+      // Check angular-material-mocks.ts for $MD_THEME_CSS latest value if this test starts to fail.
       expect($MD_THEME_CSS).toBe('/**/');
     });
 
@@ -485,7 +485,7 @@ describe('$mdThemeProvider with on-demand generation', function() {
     });
   }
 
-  beforeEach(module('material.core', function($provide, $mdThemingProvider) {
+  beforeEach(angular.mock.module('material.core', function($provide, $mdThemingProvider) {
     // Theming requires that there is at least one element present in the document head.
     cleanThemeStyleElements();
 
@@ -532,7 +532,7 @@ describe('$mdThemeProvider with on-demand generation', function() {
 
 describe('$mdThemeProvider with a theme that ends in a newline', function() {
   beforeEach(function() {
-    module('material.core', function($provide) {
+    angular.mock.module('material.core', function($provide) {
       // Note that it should end with a newline
       $provide.constant('$MD_THEME_CSS', "sparkle.md-THEME_NAME-theme { color: '{{primary-color}}' }\n");
     });
@@ -542,7 +542,8 @@ describe('$mdThemeProvider with a theme that ends in a newline', function() {
 
   it('should not add an extra closing bracket if the stylesheet ends with a newline', function() {
     var style = document.head.querySelector('style[md-theme-style]');
-    expect(style.innerText).not.toContain('}}');
+    // TODO should this be innerHTML?
+    expect((style as any).innerText).not.toContain('}}');
     style.parentNode.removeChild(style);
   });
 });
@@ -560,7 +561,7 @@ describe('$mdThemeProvider with disabled themes', function() {
   }
   beforeEach(function() {
 
-    module('material.core', function($provide, $mdThemingProvider) {
+    angular.mock.module('material.core', function($provide, $mdThemingProvider) {
       // Use a single simple style rule for which we can check presence / absense.
       $provide.constant('$MD_THEME_CSS', "sparkle.md-THEME_NAME-theme { color: '{{primary-color}}' }");
 
@@ -580,7 +581,7 @@ describe('$mdThemeProvider with disabled themes', function() {
     beforeEach(function() {
       cleanThemeStyleElements();
 
-      module('material.core', function($mdThemingProvider) {
+      angular.mock.module('material.core', function($mdThemingProvider) {
         $mdThemingProvider.disableTheming();
       });
     });
@@ -627,7 +628,7 @@ describe('$mdThemeProvider with disabled themes', function() {
 describe('$mdThemeProvider with nonce', function() {
   beforeEach(function() {
 
-    module('material.core', function($provide) {
+    angular.mock.module('material.core', function($provide) {
       /**
        *  material-mocks.js clears the $MD_THEME_CSS for Karma testing performance
        *  performance optimizations. Here inject some length into our theme_css so that
@@ -639,7 +640,7 @@ describe('$mdThemeProvider with nonce', function() {
 
   describe('and auto-generated themes', function() {
     beforeEach(function() {
-      module('material.core', function($mdThemingProvider) {
+      angular.mock.module('material.core', function($mdThemingProvider) {
         $mdThemingProvider.generateThemesOnDemand(false);
 
         $mdThemingProvider.theme('auto-nonce')
@@ -661,7 +662,7 @@ describe('$mdThemeProvider with nonce', function() {
     var $mdTheming;
 
     beforeEach(function() {
-      module('material.core', function($mdThemingProvider) {
+      angular.mock.module('material.core', function($mdThemingProvider) {
         $mdThemingProvider.generateThemesOnDemand(true);
 
         $mdThemingProvider.theme('nonce')
@@ -688,7 +689,7 @@ describe('$mdThemeProvider with nonce', function() {
 
 describe('$mdTheming service', function() {
   var $mdThemingProvider;
-  beforeEach(module('material.core', function(_$mdThemingProvider_) {
+  beforeEach(angular.mock.module('material.core', function(_$mdThemingProvider_) {
     $mdThemingProvider = _$mdThemingProvider_;
   }));
 
@@ -808,7 +809,7 @@ describe('$mdTheming service', function() {
 });
 
 describe('md-theme directive', function() {
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   it('should watch and set mdTheme controller',
     inject(function ($compile, $rootScope) {
@@ -927,7 +928,7 @@ describe('md-theme directive', function() {
 
 describe('md-themable directive', function() {
   var $mdThemingProvider;
-  beforeEach(module('material.core', function(_$mdThemingProvider_) {
+  beforeEach(angular.mock.module('material.core', function(_$mdThemingProvider_) {
     $mdThemingProvider = _$mdThemingProvider_;
   }));
 

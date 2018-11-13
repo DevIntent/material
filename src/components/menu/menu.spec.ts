@@ -2,7 +2,7 @@ describe('material.components.menu', function() {
   var attachedElements = [];
   var $mdMenu, $timeout, menuActionPerformed, $mdUtil;
 
-  beforeEach(module('material.components.menu'));
+  beforeEach(angular.mock.module('material.components.menu'));
   beforeEach(inject(function(_$mdUtil_, _$mdMenu_, _$timeout_) {
     $mdUtil = _$mdUtil_;
     $mdMenu = _$mdMenu_;

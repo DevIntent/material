@@ -7,13 +7,14 @@ describe('$animateCss', function() {
   var element, ss, doneSpy;
   var triggerAnimationStartFrame, moveAnimationClock;
 
-  beforeEach(module('material.core.animate'));
+  beforeEach(angular.mock.module('material.core.animate'));
 
-  beforeEach(module(function() {
-    return function($window, $document, $$rAF, $timeout, $rootElement, $animate, $injector, $rootScope) {
+  beforeEach(angular.mock.module(function() {
+    return function($window, $document, $$rAF, $timeout, $rootElement, $animate, $injector,
+                    $rootScope) {
       $animate.enabled(true);
 
-      ss = createMockStyleSheet($document, $window);
+      ss = (window as any).createMockStyleSheet($document, $window);
       element = jqLite('<div></div>');
       $rootElement.append(element);
       jqLite($document[0].body).append($rootElement);
@@ -443,11 +444,11 @@ describe('$animateCss', function() {
     }));
   });
 
-  function assertHasClass(element, className, not) {
+  function assertHasClass(element, className, not?) {
     expect(element.hasClass(className)).toBe(!not);
   }
 
-  function assertStyle(element, prop, val, not) {
+  function assertStyle(element, prop, val?, not?) {
     var node = element[0];
     var webKit = '-webkit-';
     var otherVal;

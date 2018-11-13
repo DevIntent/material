@@ -1,7 +1,7 @@
 describe('md-autofocus', function() {
   var $rootScope, pageScope, element;
 
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
   beforeEach(inject(function(_$rootScope_) {
     $rootScope = _$rootScope_;
   }));

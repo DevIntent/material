@@ -3,7 +3,7 @@ describe("$mdInteraction service", function() {
   var $mdInteraction = null;
   var bodyElement = null;
 
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   beforeEach(inject(function($injector) {
     $mdInteraction = $injector.get('$mdInteraction');

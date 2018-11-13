@@ -5,7 +5,7 @@ describe('md-colors', function () {
   var compiledElements = [];
   var usesRGBA;
 
-  beforeEach(module('material.components.colors', function ($mdThemingProvider) {
+  beforeEach(angular.mock.module('material.components.colors', function ($mdThemingProvider) {
     $mdThemingProvider.theme('myTheme')
       .primaryPalette('light-blue')
       .accentPalette('yellow');

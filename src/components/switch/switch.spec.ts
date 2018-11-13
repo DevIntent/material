@@ -2,7 +2,7 @@ describe('<md-switch>', function() {
   var CHECKED_CSS = 'md-checked';
   var $compile, parentScope;
 
-  beforeEach(module('ngAria', 'material.components.switch'));
+  beforeEach(angular.mock.module('ngAria', 'material.components.switch'));
 
   beforeEach(inject(function($injector) {
     var $rootScope = $injector.get('$rootScope');

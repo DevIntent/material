@@ -1,8 +1,8 @@
 describe('$$interimElement service', function() {
 
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
-  var $rootScope, $q, $timeout;
+  var $rootScope, $q, $timeout, $material;
   var $compilerSpy, $themingSpy;
 
   describe('provider', function() {
@@ -863,7 +863,7 @@ describe('$$interimElement service', function() {
   // ************************************************
 
   function setup() {
-    module('material.core', function($provide) {
+    angular.mock.module('material.core', function($provide) {
       var $mdCompiler = { compile: angular.noop };
       $compilerSpy = spyOn($mdCompiler, 'compile');
       $themingSpy = jasmine.createSpy('$mdTheming');
@@ -891,7 +891,7 @@ describe('$$interimElement service', function() {
 
   function createInterimProvider(providerName) {
     var interimProvider;
-    module(function($$interimElementProvider, $provide) {
+    angular.mock.module(function($$interimElementProvider, $provide) {
       interimProvider = $$interimElementProvider(providerName);
       $provide.provider(providerName, interimProvider);
     });

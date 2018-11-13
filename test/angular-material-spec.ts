@@ -5,8 +5,18 @@
  * unit test files: "\angular\material\src\**\*.spec.js"
  *
  */
-(function() {
+declare namespace jasmine {
+  interface Matchers<T> {
+    toHaveClass(expected: string | JQLite | Element): boolean;
+    toBeOfType(expected: string): boolean;
+    toHaveFields(expected: any): boolean;
+    toBeFocused(expected: string | JQLite | Element): boolean;
+    toExist(expected: string | JQLite | Element): boolean;
+    toContainHtml(expected: string | JQLite | Element): boolean;
+  }
+}
 
+(function() {
 
   // Patch since PhantomJS does not implement click() on HTMLElement. In some
   // cases we need to execute the native click on an element. However, jQuery's
@@ -39,20 +49,20 @@
 
     /**
      * Before each test, require that the 'ngMaterial-mock' module is ready for injection
-     * NOTE: assumes that angular-material-mocks.js has been loaded.
+     * NOTE: assumes that angular-material-mocks.ts has been loaded.
      */
 
-    module('ngAnimate');
-    module('ngMaterial-mock');
+    angular.mock.module('ngAnimate');
+    angular.mock.module('ngMaterial-mock');
 
-    module(function() {
+    angular.mock.module(function() {
       return function($mdUtil, $rootElement, $document, $animate) {
         var DISABLE_ANIMATIONS = 'disable_animations';
 
         // Create special animation 'stop' function used
         // to set 0ms durations for all animations and transitions
 
-        window.disableAnimations = function disableAnimations() {
+        (window as any).disableAnimations = function disableAnimations() {
           var body = angular.element($document[0].body);
           var head = angular.element($document[0].getElementsByTagName('head')[0]);
           var styleSheet = angular.element( buildStopTransitions() );
@@ -108,7 +118,7 @@
      * }));
      *
      */
-    jasmine.mockElementFocus = function() {
+    (jasmine as any).mockElementFocus = function() {
       var _focusFn = HTMLElement.prototype.focus;
 
       inject(function($document) {
@@ -139,7 +149,7 @@
       toHaveClass: function() {
         return {
           compare: function(actual, expected) {
-            var results = {pass: true};
+            var results = {pass: true, message: undefined};
             var classes = expected.trim().split(/\s+/);
 
             for (var i = 0; i < classes.length; ++i) {
@@ -168,7 +178,8 @@
         return {
           compare: function(actual, expected) {
             var results = {
-              pass: typeof actual == expected
+              pass: typeof actual == expected,
+              message: undefined
             };
 
             var negation = !results.pass ? "" : " not ";
@@ -187,7 +198,7 @@
       toHaveFields: function() {
         return {
           compare: function(actual, expected) {
-            var results = {pass: true};
+            var results = {pass: true, message: undefined};
 
             for (var key in expected) {
               if (!(actual || {}).hasOwnProperty(key) || !angular.equals(actual[key], expected[key])) {

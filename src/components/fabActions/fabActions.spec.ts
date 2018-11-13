@@ -1,6 +1,6 @@
 describe('<md-fab-actions> directive', function() {
 
-  beforeEach(module('material.components.fabActions'));
+  beforeEach(angular.mock.module('material.components.fabActions'));
 
   var pageScope, element, controller;
 

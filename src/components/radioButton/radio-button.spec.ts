@@ -2,7 +2,7 @@ describe('mdRadioButton component', function() {
 
   var CHECKED_CSS = 'md-checked';
 
-  beforeEach(module('material.components.radioButton', 'ngAria'));
+  beforeEach(angular.mock.module('material.components.radioButton', 'ngAria'));
 
   describe('md-radio-group', function() {
 

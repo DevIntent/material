@@ -20,7 +20,7 @@
   // that should NOT be exposed to the public but that should be tested.
   //
   // As an example, see input.js which exposes some animation-related methods.
-  window._mdMocksIncluded = true;
+  (window as any)._mdMocksIncluded = true;
 
 /**
  * @ngdoc module
@@ -111,7 +111,7 @@ angular.module('ngMaterial-mock', [
   /**
    * Stylesheet Mocks used by `animateCss.spec.js`
    */
-  window.createMockStyleSheet = function createMockStyleSheet(doc, wind) {
+  (window as any).createMockStyleSheet = function createMockStyleSheet(doc, wind) {
     doc = doc ? doc[0] : window.document;
     wind = wind || window;
 
@@ -183,4 +183,4 @@ angular.module('ngMaterial-mock', [
 
   };
 
-})(window, window.angular);
+})(window, (window as any).angular);

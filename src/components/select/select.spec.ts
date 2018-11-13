@@ -1603,7 +1603,7 @@ describe('<md-select>', function() {
 describe('<md-select> without ngSanitize loaded', function() {
   var $compile, pageScope;
 
-  beforeEach(module('material.components.select', 'material.components.input'));
+  beforeEach(angular.mock.module('material.components.select', 'material.components.input'));
 
   beforeEach(inject(function($injector) {
     $compile = $injector.get('$compile');

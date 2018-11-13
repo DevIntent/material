@@ -1,7 +1,7 @@
 describe('showHide', function() {
   var $compile, $timeout, defered, scope, spy;
 
-  beforeEach(module('material.components.showHide'));
+  beforeEach(angular.mock.module('material.components.showHide'));
 
   beforeEach(inject(function(_$compile_, $mdUtil, $q, $rootScope, _$timeout_) {
     $compile = _$compile_;

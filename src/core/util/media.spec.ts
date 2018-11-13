@@ -9,7 +9,7 @@ describe('$mdMedia', function() {
     });
   }
 
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   beforeEach(inject(function($mdMedia, $window) {
     matchMediaResult = false;

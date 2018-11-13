@@ -1,7 +1,7 @@
 describe('mdProgressCircular', function() {
   var $compile, $rootScope, config, element;
 
-  beforeEach(module('material.components.progressCircular'));
+  beforeEach(angular.mock.module('material.components.progressCircular'));
   beforeEach(inject(function(_$compile_, _$rootScope_, _$mdProgressCircular_) {
     $compile = _$compile_;
     $rootScope = _$rootScope_;

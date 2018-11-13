@@ -1,7 +1,7 @@
 describe('$$mdMeta', function() {
   var $$mdMeta;
 
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   beforeEach(function() {
     inject(function(_$$mdMeta_) {

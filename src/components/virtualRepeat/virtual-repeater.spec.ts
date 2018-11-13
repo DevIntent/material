@@ -2,7 +2,7 @@ describe('<md-virtual-repeat>', function() {
 
   var MAX_ELEMENT_PIXELS = 10000;
 
-  beforeEach(module('material.components.virtualRepeat', function($provide) {
+  beforeEach(angular.mock.module('material.components.virtualRepeat', function($provide) {
     /*
      * Overwrite the $mdConstant ELEMENT_MAX_PIXELS property, because for testing it requires too much
      * memory and crashes the tests sometimes.

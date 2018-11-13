@@ -1,6 +1,6 @@
 describe('$mdSticky service', function() {
 
-  beforeEach(module('material.components.sticky'));
+  beforeEach(angular.mock.module('material.components.sticky'));
 
   it('should compile our cloned element in the same scope', function(done) {
     inject(function($compile, $rootScope, $mdSticky, $timeout) {
@@ -89,7 +89,7 @@ describe('$mdSticky service', function() {
 describe('$mdStickySpec', function() {
   var $document, $compile, $rootScope, $mdSticky;
 
-  beforeEach(module('material.components.sticky'));
+  beforeEach(angular.mock.module('material.components.sticky'));
 
   beforeEach(inject(function(_$document_, _$compile_, _$rootScope_, _$mdSticky_) {
     $document = _$document_;

@@ -3,7 +3,7 @@ describe('<md-fab-speed-dial> directive', function() {
   var pageScope, element, controller;
   var $rootScope, $animate, $timeout;
 
-  beforeEach(module('material.components.fabSpeedDial'));
+  beforeEach(angular.mock.module('material.components.fabSpeedDial'));
   beforeEach(inject(function(_$rootScope_, _$animate_, _$timeout_) {
     $rootScope = _$rootScope_;
     $animate = _$animate_;

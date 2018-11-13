@@ -1,10 +1,10 @@
 describe('$mdComponentRegistry Service', function() {
-  beforeEach(module( 'material.core', 'material.components.sidenav' ));
+  beforeEach(angular.mock.module( 'material.core', 'material.components.sidenav' ));
 
   /**
    * SideNav element construction macro
    */
-  function setup(attrs) {
+  function setup(attrs?) {
     var el;
     inject(function($compile, $rootScope) {
       var parent = angular.element('<div>');

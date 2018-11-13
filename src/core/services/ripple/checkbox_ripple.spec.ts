@@ -1,6 +1,6 @@
 describe('MdCheckboxInkRipple', function() {
 
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   var $element, $rootScope, $mdCheckboxInkRipple, $mdInkRipple;
   beforeEach(inject(function(_$rootScope_, _$mdCheckboxInkRipple_, _$mdInkRipple_) {

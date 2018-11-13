@@ -1,7 +1,7 @@
 describe('<md-truncate>', function() {
   var $compile, $rootScope;
 
-  beforeEach(module('material.components.truncate'));
+  beforeEach(angular.mock.module('material.components.truncate'));
   beforeEach(inject(function(_$compile_, _$rootScope_) {
     $compile = _$compile_;
     $rootScope = _$rootScope_;

@@ -2,7 +2,7 @@ describe('$mdDialog', function() {
   var $mdDialog, $rootScope;
   var runAnimation;
 
-  beforeEach(module('material.components.dialog', 'ngSanitize'));
+  beforeEach(angular.mock.module('material.components.dialog', 'ngSanitize'));
   beforeEach(inject(function($$q, $animate, $injector) {
     $mdDialog = $injector.get('$mdDialog');
     $rootScope = $injector.get('$rootScope');
@@ -1998,9 +1998,9 @@ describe('$mdDialog', function() {
 });
 
 describe('$mdDialog with custom interpolation symbols', function() {
-  beforeEach(module('material.components.dialog'));
+  beforeEach(angular.mock.module('material.components.dialog'));
 
-  beforeEach(module(function($interpolateProvider) {
+  beforeEach(angular.mock.module(function($interpolateProvider) {
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
   }));
 

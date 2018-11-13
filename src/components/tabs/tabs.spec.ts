@@ -1,6 +1,6 @@
 describe('<md-tabs>', function () {
 
-  beforeEach(module('material.components.tabs'));
+  beforeEach(angular.mock.module('material.components.tabs'));
   beforeEach(function () {
     jasmine.mockElementFocus(this);
 

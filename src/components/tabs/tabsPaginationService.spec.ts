@@ -4,7 +4,7 @@ describe('MdTabsPaginationService', function() {
 
   var MdTabsPaginationService;
 
-  beforeEach(module('material.components.tabs'));
+  beforeEach(angular.mock.module('material.components.tabs'));
   beforeEach(injectGlobals);
 
   var customMatchers = {

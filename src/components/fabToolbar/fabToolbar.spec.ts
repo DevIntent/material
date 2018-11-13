@@ -1,6 +1,6 @@
 describe('<md-fab-toolbar> directive', function() {
 
-  beforeEach(module('material.components.fabToolbar'));
+  beforeEach(angular.mock.module('material.components.fabToolbar'));
 
   var pageScope, element, controller;
 

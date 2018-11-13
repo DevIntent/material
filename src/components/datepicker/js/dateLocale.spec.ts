@@ -13,10 +13,10 @@ describe('$mdDateLocale', function() {
     }
   };
 
-  beforeEach(module('material.components.datepicker'));
+  beforeEach(angular.mock.module('material.components.datepicker'));
 
   describe('with default values', function() {
-    beforeEach(module(function($provide) {
+    beforeEach(angular.mock.module(function($provide) {
       $provide.value('$locale', $localeFake);
     }));
 
@@ -88,7 +88,7 @@ describe('$mdDateLocale', function() {
         'X12', 'X13', 'X14', 'X15', 'X16', 'X17', 'X18', 'X19', 'X20', 'X21', 'X22', 'X23', 'X24',
         'X25', 'X26', 'X27', 'X28', 'X29', 'X30', 'X31'];
 
-    beforeEach(module(function($mdDateLocaleProvider) {
+    beforeEach(angular.mock.module(function($mdDateLocaleProvider) {
       $mdDateLocaleProvider.months = fakeMonths;
       $mdDateLocaleProvider.shortMonths = fakeshortMonths;
       $mdDateLocaleProvider.days = fakeDays;

@@ -34,6 +34,10 @@
   "devDependencies": {
     "@octokit/rest": "^15.9.2",
     "@types/angular": "^1.6.51",
+    "@types/angular-mocks": "^1.7.0",
+    "@types/jasmine": "^2.8.11",
+    "@types/jasminewd2": "^2.0.6",
+    "@types/jquery": "^3.3.22",
     "add-stream": "^1.0.0",
     "ajv": "^6.5.2",
     "angular": "^1.7.4",

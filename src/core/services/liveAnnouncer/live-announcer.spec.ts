@@ -3,7 +3,7 @@ describe('$mdLiveAnnouncer', function() {
   var $mdLiveAnnouncer, $timeout = null;
   var liveEl = null;
 
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   beforeEach(inject(function ($injector) {
     $mdLiveAnnouncer = $injector.get('$mdLiveAnnouncer');

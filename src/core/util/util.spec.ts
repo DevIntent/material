@@ -1,9 +1,11 @@
+import * as angular from 'angular';
+
 describe('util', function() {
 
   describe('with no overrides', function() {
-    beforeEach(module('material.core'));
+    beforeEach(angular.mock.module('material.core'));
 
-    var $rootScope, $timeout, $$mdAnimate;
+    var $rootScope, $timeout, $animate;
     beforeEach(inject(function(_$animate_, _$rootScope_, _$timeout_) {
       $animate = _$animate_;
       $rootScope = _$rootScope_;
@@ -657,11 +659,11 @@ describe('util', function() {
 
     describe('processTemplate', function() {
       beforeEach(function() {
-        module(function($interpolateProvider) {
+        angular.mock.module(function($interpolateProvider) {
             $interpolateProvider.startSymbol('[[');
             $interpolateProvider.endSymbol(']]');
         });
-        module('material.core');
+        angular.mock.module('material.core');
       });
 
       it('should replace the start/end symbols', inject(function($mdUtil) {

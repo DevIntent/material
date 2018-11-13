@@ -3,7 +3,7 @@ describe('mdSubheader', function() {
   var pageScope, element, cloneElement, controller, contentElement;
   var $rootScope, $timeout, $exceptionHandler;
 
-  beforeEach(module('material.components.subheader', function($provide) {
+  beforeEach(angular.mock.module('material.components.subheader', function($provide) {
     $provide.decorator('$mdUtil', function($delegate) {
 
       // We always return nothing on the checkStickySupport method to test the functionality of the subheaders

@@ -1,6 +1,6 @@
 describe('$mdToast service', function() {
 
-  beforeEach(module('material.components.toast'));
+  beforeEach(angular.mock.module('material.components.toast'));
 
   beforeEach(function () {
     module(function ($provide) {
@@ -135,7 +135,7 @@ describe('$mdToast service', function() {
     }));
 
     describe('when using custom interpolation symbols', function() {
-      beforeEach(module(function($interpolateProvider) {
+      beforeEach(angular.mock.module(function($interpolateProvider) {
         $interpolateProvider.startSymbol('[[').endSymbol(']]');
       }));
 

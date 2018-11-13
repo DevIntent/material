@@ -4,7 +4,7 @@ describe('md-input-container directive', function() {
   var invalidAnimation, messagesAnimation, messageAnimation;
   var $animProvider;
 
-  beforeEach(module('ngAria', 'material.components.input', 'ngMessages'));
+  beforeEach(angular.mock.module('ngAria', 'material.components.input', 'ngMessages'));
 
   // Setup/grab our variables
   beforeEach(inject(function($injector) {

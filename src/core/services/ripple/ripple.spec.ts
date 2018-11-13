@@ -1,6 +1,6 @@
 describe('mdInkRipple directive', function() {
 
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   describe('with string values', function () {
     it('should support custom colors', inject(function ($compile, $rootScope) {
@@ -138,7 +138,7 @@ describe('mdInkRipple directive', function() {
 
 describe('disabling ripples globally', function() {
   beforeEach(function() {
-    module('material.core', function($mdInkRippleProvider) {
+    angular.mock.module('material.core', function($mdInkRippleProvider) {
       $mdInkRippleProvider.disableInkRipple();
     });
   });

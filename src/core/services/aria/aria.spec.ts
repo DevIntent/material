@@ -1,6 +1,6 @@
 describe('$mdAria service', function() {
 
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   describe('expecting attributes', function() {
 
@@ -167,7 +167,7 @@ describe('$mdAria service', function() {
 
   describe('with disabled warnings', function() {
 
-    beforeEach(module('material.core', function($mdAriaProvider) {
+    beforeEach(angular.mock.module('material.core', function($mdAriaProvider) {
       $mdAriaProvider.disableWarnings();
     }));
 

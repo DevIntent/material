@@ -1,7 +1,7 @@
 describe("Layout API ", function() {
 
   describe("can be globally disabled with 'md-layouts-disabled' ", function() {
-    var disableLayouts = angular.noop,
+    var disableLayouts: any = angular.noop,
         activateLayouts = function() {
           var el = document.body;
               el.removeAttribute('md-layouts-disabled');
@@ -14,7 +14,7 @@ describe("Layout API ", function() {
           el.setAttribute('md-layouts-disabled', '');
 
       // Load the core module
-      module('material.core', function($$mdLayoutProvider) {
+      angular.mock.module('material.core', function($$mdLayoutProvider) {
           disableLayouts = angular.bind($$mdLayoutProvider, $$mdLayoutProvider.disableLayouts);
       });
     });
@@ -322,7 +322,7 @@ describe("Layout API ", function() {
     /**
      * Test other Layout directives (e.g. flex, flex-order, flex-offset)
      */
-    function testWithValue(className, value, raw) {
+    function testWithValue(className, value, raw?) {
       var title = 'should allow valid values `' + className + '=' + value + '`';
 
       it(title, function() {

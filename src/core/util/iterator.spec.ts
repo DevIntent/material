@@ -1,5 +1,5 @@
 describe('iterator', function() {
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   describe('use to provide accessor API ', function () {
 

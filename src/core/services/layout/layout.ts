@@ -128,10 +128,10 @@
 
       // !! Deprecated attributes: use the `-lt` (aka less-than) notations
 
-      .directive('layoutLtMd'     , warnAttrNotSupported('layout-lt-md', true))
-      .directive('layoutLtLg'     , warnAttrNotSupported('layout-lt-lg', true))
-      .directive('flexLtMd'       , warnAttrNotSupported('flex-lt-md', true))
-      .directive('flexLtLg'       , warnAttrNotSupported('flex-lt-lg', true))
+      .directive('layoutLtMd'     , warnAttrNotSupported('layout-lt-md'))
+      .directive('layoutLtLg'     , warnAttrNotSupported('layout-lt-lg'))
+      .directive('flexLtMd'       , warnAttrNotSupported('flex-lt-md'))
+      .directive('flexLtLg'       , warnAttrNotSupported('flex-lt-lg'))
 
       .directive('layoutAlignLtMd', warnAttrNotSupported('layout-align-lt-md'))
       .directive('layoutAlignLtLg', warnAttrNotSupported('layout-align-lt-lg'))
@@ -286,7 +286,7 @@
      * remove the deprecated attribute selector
      */
     function translateWithValueToCssClass(scope, element, attrs) {
-      var updateFn = updateClassWithValue(element, className, attrs);
+      var updateFn = updateClassWithValue(element, className);
       var unwatch = attrs.$observe(attrs.$normalize(className), updateFn);
 
       updateFn(getNormalizedAttrValue(className, attrs, ""));
@@ -406,7 +406,7 @@
    * For the Layout attribute value, validate or replace with default
    * fallback value
    */
-  function validateAttributeValue(className, value, updateFn) {
+  function validateAttributeValue(className, value, updateFn?) {
     var origValue;
 
     if (!needsInterpolation(value)) {
@@ -481,7 +481,7 @@
     return attrs[normalizedAttr] ? attrs[normalizedAttr].trim().replace(WHITESPACE, "-") : defaultVal || null;
   }
 
-  function findIn(item, list, replaceWith) {
+  function findIn(item, list, replaceWith?) {
     item = replaceWith && item ? item.replace(WHITESPACE, replaceWith) : item;
 
     var found = false;

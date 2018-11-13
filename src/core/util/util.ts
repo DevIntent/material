@@ -19,7 +19,8 @@ angular
 /**
  * @ngInject
  */
-function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $interpolate, $log, $rootElement, $window, $$rAF) {
+function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $interpolate, $log,
+                     $rootElement, $window, $$rAF) {
   // Setup some core variables for the processTemplate method
   var startSymbol = $interpolate.startSymbol(),
     endSymbol = $interpolate.endSymbol(),
@@ -218,23 +219,24 @@ function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $in
      */
     disableScrollAround: function(element, parent, options) {
       options = options || {};
+      const disableScrollAroundState = $mdUtil.disableScrollAround as any;
 
-      $mdUtil.disableScrollAround._count = Math.max(0, $mdUtil.disableScrollAround._count || 0);
-      $mdUtil.disableScrollAround._count++;
+      disableScrollAroundState._count = Math.max(0, disableScrollAroundState._count || 0);
+      disableScrollAroundState._count++;
 
-      if ($mdUtil.disableScrollAround._restoreScroll) {
-        return $mdUtil.disableScrollAround._restoreScroll;
+      if (disableScrollAroundState._restoreScroll) {
+        return disableScrollAroundState._restoreScroll;
       }
 
       var body = $document[0].body;
       var restoreBody = disableBodyScroll();
       var restoreElement = disableElementScroll(parent);
 
-      return $mdUtil.disableScrollAround._restoreScroll = function() {
-        if (--$mdUtil.disableScrollAround._count <= 0) {
+      return disableScrollAroundState._restoreScroll = function() {
+        if (--disableScrollAroundState._count <= 0) {
           restoreBody();
           restoreElement();
-          delete $mdUtil.disableScrollAround._restoreScroll;
+          delete disableScrollAroundState._restoreScroll;
         }
       };
 
@@ -331,7 +333,8 @@ function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $in
         tempNode.children().css('height', '60px');
 
         $document[0].body.appendChild(tempNode[0]);
-        this.floatingScrollbars.cached = (tempNode[0].offsetWidth == tempNode[0].childNodes[0].offsetWidth);
+        this.floatingScrollbars.cached =
+          tempNode[0].offsetWidth == (tempNode[0].childNodes[0] as HTMLElement).offsetWidth;
         tempNode.remove();
       }
       return this.floatingScrollbars.cached;
@@ -340,8 +343,12 @@ function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $in
     // Mobile safari only allows you to set focus in click event listeners...
     forceFocus: function(element) {
       var node = element[0] || element;
+      class MaterialMouseEvent extends MouseEvent {
+        $focus: boolean;
+        $material: boolean;
+      }
 
-      document.addEventListener('click', function focusOnClick(ev) {
+      document.addEventListener('click', function focusOnClick(ev: MaterialMouseEvent) {
         if (ev.target === node && ev.$focus) {
           node.focus();
           ev.stopImmediatePropagation();
@@ -350,8 +357,10 @@ function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $in
         }
       }, true);
 
-      var newEvent = document.createEvent('MouseEvents');
-      newEvent.initMouseEvent('click', false, true, window, {}, 0, 0, 0, 0,
+      var newEvent = document.createEvent('MouseEvents') as MaterialMouseEvent;
+      // TODO this method is deprecated
+      // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
+      newEvent.initMouseEvent('click', false, true, window, 1, 0, 0, 0, 0,
         false, false, false, false, 0, null);
       newEvent.$material = true;
       newEvent.$focus = true;
@@ -372,7 +381,7 @@ function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $in
      * interpolation symbols and scope. Note: the '{<token>}' can
      * be property names, property chains, or array indices.
      */
-    supplant: function(template, values, pattern) {
+    supplant: function(template, values, pattern?) {
       pattern = pattern || /\{([^{}]*)\}/g;
       return template.replace(pattern, function(a, b) {
         var p = b.split('.'),
@@ -563,7 +572,8 @@ function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $in
      * Build polyfill for the Node.contains feature (if needed)
      */
     elementContains: function(node, child) {
-      var hasContains = (window.Node && window.Node.prototype && Node.prototype.contains);
+      var hasContains = ((window as any).Node && (window as any).Node.prototype &&
+        Node.prototype.contains);
       var findFn = hasContains ? angular.bind(node, node.contains) : angular.bind(node, function(arg) {
         // compares the positions of two nodes and returns a bitmask
         return (node === child) || !!(this.compareDocumentPosition(arg) & 16);
@@ -576,15 +586,18 @@ function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $in
      * Functional equivalent for $element.filter(‘md-bottom-sheet’)
      * useful with interimElements where the element and its container are important...
      *
-     * @param {[]} elements to scan
-     * @param {string} name of node to find (e.g. 'md-dialog')
-     * @param {boolean=} optional flag to allow deep scans; defaults to 'false'.
-     * @param {boolean=} optional flag to enable log warnings; defaults to false
+     * @param {[]} element to scan
+     * @param {string} nodeName of node to find (e.g. 'md-dialog')
+     * @param {boolean=} scanDeep flag to allow deep scans; defaults to 'false'.
+     * @param {boolean=} warnNotFound flag to enable log warnings; defaults to false
      */
     extractElementByName: function(element, nodeName, scanDeep, warnNotFound) {
       var found = scanTree(element);
       if (!found && !!warnNotFound) {
-        $log.warn( $mdUtil.supplant("Unable to find node '{0}' in element '{1}'.",[nodeName, element[0].outerHTML]) );
+        $log.warn(
+          $mdUtil.supplant("Unable to find node '{0}' in element '{1}'.",
+            [nodeName, element[0].outerHTML])
+        );
       }
 
       return angular.element(found || element);
@@ -656,7 +669,7 @@ function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $in
      */
     nextTick: function(callback, digest, scope) {
       //-- grab function reference for storing state details
-      var nextTick = $mdUtil.nextTick;
+      var nextTick = $mdUtil.nextTick as any;
       var timeout = nextTick.timeout;
       var queue = nextTick.queue || [];
 

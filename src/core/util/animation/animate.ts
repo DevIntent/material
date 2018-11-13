@@ -165,7 +165,7 @@ function AnimateDomUtils($mdUtil, $q, $timeout, $mdConstant, $animateCss) {
       var css = { };
       var lookups = 'left top right bottom width height x y min-width min-height max-width max-height';
 
-      angular.forEach(raw, function(value,key) {
+      angular.forEach(raw, function(value, key: any) {
         if ( angular.isUndefined(value) ) return;
 
         if ( lookups.indexOf(key) >= 0 ) {
@@ -201,7 +201,7 @@ function AnimateDomUtils($mdUtil, $q, $timeout, $mdConstant, $animateCss) {
      * Convert the translate CSS value to key/value pair(s).
      */
     toTransformCss: function (transform, addTransition, transition) {
-      var css = {};
+      var css: any = {};
       angular.forEach($mdConstant.CSS.TRANSFORM.split(' '), function (key) {
         css[key] = transform;
       });

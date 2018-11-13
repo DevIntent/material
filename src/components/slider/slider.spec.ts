@@ -1,8 +1,8 @@
 describe('md-slider', function() {
   var $compile, $timeout, $log, $mdConstant, pageScope;
 
-  beforeEach(module('ngAria'));
-  beforeEach(module('material.components.slider'));
+  beforeEach(angular.mock.module('ngAria'));
+  beforeEach(angular.mock.module('material.components.slider'));
 
   beforeEach(inject(function($injector) {
     var $rootScope = $injector.get('$rootScope');

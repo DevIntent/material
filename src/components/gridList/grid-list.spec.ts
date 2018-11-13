@@ -15,11 +15,11 @@ describe('md-grid-list', function() {
     return angular.noop;
   };
 
-  beforeEach(module(function($provide) {
+  beforeEach(angular.mock.module(function($provide) {
     $provide.value('$mdMedia', $mdMediaMock);
   }));
 
-  beforeEach(module('material.components.gridList'));
+  beforeEach(angular.mock.module('material.components.gridList'));
 
   it('should have `._md` class indicator', inject(function($compile, $rootScope) {
     var element = $compile('<md-grid-list></md-grid-list>')($rootScope.$new());

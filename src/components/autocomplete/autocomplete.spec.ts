@@ -2,7 +2,7 @@ describe('<md-autocomplete>', function() {
 
   var element, scope;
 
-  beforeEach(module('material.components.autocomplete'));
+  beforeEach(angular.mock.module('material.components.autocomplete'));
 
   afterEach(function() {
     scope && scope.$destroy();

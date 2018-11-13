@@ -37,7 +37,7 @@ describe('<md-chips>', function() {
 
 
   describe('with no overrides', function() {
-    beforeEach(module('material.components.chips', 'material.components.autocomplete'));
+    beforeEach(angular.mock.module('material.components.chips', 'material.components.autocomplete'));
     beforeEach(inject(function($rootScope, _$exceptionHandler_, _$timeout_) {
       scope = $rootScope.$new(false);
       scope.items = ['Apple', 'Banana', 'Orange'];
@@ -1734,11 +1734,11 @@ describe('<md-chips>', function() {
   });
 
   describe('with $interpolate.start/endSymbol override', function() {
-    beforeEach(module(function($interpolateProvider) {
+    beforeEach(angular.mock.module(function($interpolateProvider) {
       $interpolateProvider.startSymbol('[[').endSymbol(']]');
     }));
 
-    beforeEach(module('material.components.chips', 'material.components.autocomplete'));
+    beforeEach(angular.mock.module('material.components.chips', 'material.components.autocomplete'));
 
     beforeEach(inject(function($rootScope) {
       scope = $rootScope.$new();

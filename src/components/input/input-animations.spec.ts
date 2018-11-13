@@ -3,7 +3,7 @@ describe('md-input-container animations', function() {
     el, root, body, pageScope, computedStyle, invalidAnimation, messagesAnimation, messageAnimation;
 
   // Load our modules
-  beforeEach(module('ngAnimate', 'ngMessages', 'material.components.input', 'material.components.checkbox'));
+  beforeEach(angular.mock.module('ngAnimate', 'ngMessages', 'material.components.input', 'material.components.checkbox'));
 
   // Run pre-test setup
   beforeEach(injectGlobals);

@@ -14,7 +14,7 @@ describe('<md-contact-chips>', function() {
           placeholder="To">\
       </md-contact-chips>';
 
-  beforeEach(module('material.components.chips'));
+  beforeEach(angular.mock.module('material.components.chips'));
 
   beforeEach(inject(function($rootScope, $mdConstant) {
     scope = $rootScope.$new(false);

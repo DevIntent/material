@@ -26,7 +26,7 @@ angular.module('material.core')
  */
 
 function InterimElementProvider() {
-  createInterimElementProvider.$get = InterimElementFactory;
+  (createInterimElementProvider as any).$get = InterimElementFactory;
   return createInterimElementProvider;
 
   /**
@@ -34,11 +34,11 @@ function InterimElementProvider() {
    * service. Allows configuration of default options & methods for options,
    * as well as configuration of 'preset' methods (eg dialog.basic(): basic is a preset method)
    */
-  function createInterimElementProvider(interimFactoryName) {
+  function createInterimElementProvider(interimFactoryName: string) {
     var EXPOSED_METHODS = ['onHide', 'onShow', 'onRemove'];
 
     var customMethods = {};
-    var providerConfig = {
+    var providerConfig: any = {
       presets: {}
     };
 
@@ -137,7 +137,7 @@ function InterimElementProvider() {
         publicService[name] = fn;
       });
 
-      angular.forEach(providerConfig.presets, function(definition, name) {
+      angular.forEach(providerConfig.presets, function(definition, name: string) {
         var presetDefaults = invokeFactory(definition.optionsFactory, {});
         var presetMethods = (definition.methods || []).concat(defaultMethods);
 
@@ -161,7 +161,7 @@ function InterimElementProvider() {
         // })
         //
         // Set values will be passed to the options when interimElement.show() is called.
-        function Preset(opts) {
+        function Preset(opts?) {
           this._options = angular.extend({}, presetDefaults, opts);
         }
         angular.forEach(presetMethods, function(name) {
@@ -288,9 +288,9 @@ function InterimElementProvider() {
        * @returns a Promise
        *
        */
-      function show(options) {
+      function show(options?) {
         options = options || {};
-        var interimElement = new InterimElement(options || {});
+        var interimElement = new InterimElement(options);
 
         // When an interim element is currently showing, we have to cancel it.
         // Just hiding it, will resolve the InterimElement's promise, the promise should be
@@ -468,7 +468,7 @@ function InterimElementProvider() {
        * Internal Interim Element Object
        * Used internally to manage the DOM element and related data
        */
-      function InterimElement(options) {
+      function InterimElement(options?) {
         var self, element, showAction = $q.when(true);
 
         options = configureScopeAndTransitions(options);
@@ -549,14 +549,14 @@ function InterimElementProvider() {
            * element is hidden or cancelled...
            */
           function resolveAll(response) {
-            self.deferred.resolve(response);
+            return self.deferred.resolve(response);
           }
 
           /**
            * Force the '$md<xxx>.show()' promise to reject
            */
           function rejectAll(fault) {
-            self.deferred.reject(fault);
+            return self.deferred.reject(fault);
           }
         }
 
@@ -564,7 +564,7 @@ function InterimElementProvider() {
          * Prepare optional isolated scope and prepare $animate with default enter and leave
          * transitions for the new element instance.
          */
-        function configureScopeAndTransitions(options) {
+        function configureScopeAndTransitions(options?) {
           options = options || { };
           if ( options.template ) {
             options.template = $mdUtil.processTemplate(options.template);

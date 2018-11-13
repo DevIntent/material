@@ -14,14 +14,14 @@
     ]
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./test/*"
   ],
   "exclude": [
     "./src/**/demo*/**/*",
     "./scripts/*",
     "./config/*",
     "./docs/*",
-    "./test/*",
     "./gulp/*",
     "./*.*"
   ]

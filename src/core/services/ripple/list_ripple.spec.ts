@@ -1,6 +1,6 @@
 describe('MdListInkRipple', function() {
 
-  beforeEach(module('material.core'));
+  beforeEach(angular.mock.module('material.core'));
 
   var $element, $rootScope, $mdListInkRipple, $mdInkRipple;
   beforeEach(inject(function(_$rootScope_, _$mdListInkRipple_, _$mdInkRipple_) {

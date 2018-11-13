@@ -4,7 +4,7 @@ describe('mdCheckbox', function() {
   var INDETERMINATE_CSS = 'md-indeterminate';
   var $compile, $log, pageScope, $mdConstant;
 
-  beforeEach(module('ngAria', 'material.components.checkbox'));
+  beforeEach(angular.mock.module('ngAria', 'material.components.checkbox'));
 
   beforeEach(inject(function($injector) {
     $compile = $injector.get('$compile');

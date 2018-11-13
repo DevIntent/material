@@ -461,7 +461,7 @@ function ThemingProvider($mdColorPalette, $$mdMetaProvider) {
    * @param {string} name Name of theme being registered
    * @param {string=} inheritFrom Existing theme name to inherit from
    */
-  function registerTheme(name, inheritFrom) {
+  function registerTheme(name, inheritFrom?) {
     if (THEMES[name]) return THEMES[name];
 
     inheritFrom = inheritFrom || 'default';
@@ -710,7 +710,7 @@ function ThemingProvider($mdColorPalette, $$mdMetaProvider) {
     var applyTheme = function (scope, el) {
       if (el === undefined) { el = scope; scope = undefined; }
       if (scope === undefined) { scope = $rootScope; }
-      applyTheme.inherit(el, el);
+      (applyTheme as any).inherit(el, el);
     };
 
     Object.defineProperty(applyTheme, 'THEMES', {
@@ -728,11 +728,11 @@ function ThemingProvider($mdColorPalette, $$mdMetaProvider) {
         return alwaysWatchTheme;
       }
     });
-    applyTheme.inherit = inheritTheme;
-    applyTheme.registered = registered;
-    applyTheme.defaultTheme = function() { return defaultTheme; };
-    applyTheme.generateTheme = function(name) { generateTheme(THEMES[name], name, themeConfig.nonce); };
-    applyTheme.defineTheme = function(name, options) {
+    (applyTheme as any).inherit = inheritTheme;
+    (applyTheme as any).registered = registered;
+    (applyTheme as any).defaultTheme = function() { return defaultTheme; };
+    (applyTheme as any).generateTheme = function(name) { generateTheme(THEMES[name], name, themeConfig.nonce); };
+    (applyTheme as any).defineTheme = function(name, options) {
       options = options || {};
 
       var theme = registerTheme(name);
@@ -757,7 +757,7 @@ function ThemingProvider($mdColorPalette, $$mdMetaProvider) {
 
       return $q.resolve(name);
     };
-    applyTheme.setBrowserColor = enableBrowserColor;
+    (applyTheme as any).setBrowserColor = enableBrowserColor;
 
     return applyTheme;
 
@@ -766,7 +766,7 @@ function ThemingProvider($mdColorPalette, $$mdMetaProvider) {
      */
     function registered(themeName) {
       if (themeName === undefined || themeName === '') return true;
-      return applyTheme.THEMES[themeName] !== undefined;
+      return (applyTheme as any).THEMES[themeName] !== undefined;
     }
 
     /**
@@ -889,7 +889,7 @@ function ThemingDirective($mdTheming, $interpolate, $parse, $mdUtil, $q, $log) {
               $log.warn('attempted to use unregistered theme \'' + theme + '\'');
             }
 
-            ctrl.$mdTheme = theme;
+            (ctrl as any).$mdTheme = theme;
 
             // Iterating backwards to support unregistering during iteration
             // http://stackoverflow.com/a/9882349/890293
@@ -1194,7 +1194,7 @@ function colorToRgbaArray(clr) {
   if (angular.isArray(clr) && clr.length == 3) return clr;
   if (/^rgb/.test(clr)) {
     return clr.replace(/(^\s*rgba?\(|\)\s*$)/g, '').split(',').map(function(value, i) {
-      return i == 3 ? parseFloat(value, 10) : parseInt(value, 10);
+      return i == 3 ? parseFloat(value) : parseInt(value, 10);
     });
   }
   if (clr.charAt(0) == '#') clr = clr.substring(1);
@@ -1225,4 +1225,4 @@ function rgba(rgbArray, opacity) {
 }
 
 
-})(window.angular);
+})((window as any).angular);

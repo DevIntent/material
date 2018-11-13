@@ -132,7 +132,7 @@ describe('md-calendar', function() {
     return element.querySelector('.md-focus');
   }
 
-  beforeEach(module('material.components.datepicker', 'ngAnimateMock'));
+  beforeEach(angular.mock.module('material.components.datepicker', 'ngAnimateMock'));
 
   beforeEach(inject(function($injector) {
     jasmine.addMatchers({

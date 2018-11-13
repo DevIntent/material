@@ -1,7 +1,7 @@
 describe('material.components.menuBar', function() {
   var attachedMenuElements = [];
 
-  beforeEach(module('material.components.menuBar'));
+  beforeEach(angular.mock.module('material.components.menuBar'));
 
   afterEach(function() {
     attachedMenuElements.forEach(function(element) {

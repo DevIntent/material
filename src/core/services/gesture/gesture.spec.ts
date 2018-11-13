@@ -1,6 +1,6 @@
 describe('$mdGesture', function() {
 
-  beforeEach(module('material.core', function() {
+  beforeEach(angular.mock.module('material.core', function() {
     angular.element(document).triggerHandler('$$mdGestureReset');
   }));
 

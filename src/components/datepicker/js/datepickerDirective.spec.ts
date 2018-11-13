@@ -23,7 +23,7 @@ describe('md-datepicker', function() {
          'ng-disabled="isDisabled">' +
     '</md-datepicker>';
 
-  beforeEach(module('material.components.datepicker', 'material.components.input', 'ngAnimateMock'));
+  beforeEach(angular.mock.module('material.components.datepicker', 'material.components.input', 'ngAnimateMock'));
 
   beforeEach(inject(function($rootScope, $injector) {
     $compile = $injector.get('$compile');

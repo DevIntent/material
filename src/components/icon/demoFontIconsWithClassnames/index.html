@@ -1,40 +1,29 @@
-<div ng-controller="DemoCtrl" ng-cloak >
-  <p>Display 5 font-icons, each with different sizes and colors</p>
-  <!-- Display font icons from Icomoon.io: -->
-  <div class="glyph" ng-repeat="font in fonts" layout="row">
-    <div ng-repeat="it in sizes" flex layout-align="center center" style="text-align: center;" layout="column">
-      <div flex></div>
-      <div class="preview-glyphs">
-        <md-icon md-font-icon="{{ font.name }}"
-            ng-style="{color: !font.theme && font.color, 'font-size': it.size + 'px', height: it.size + 'px'}"
-            ng-class="font.theme"
-            aria-label="{{ font.name + it.size }}"
-            class="step "></md-icon>
-      </div>
-      <div class="preview-scale">
-        <span class="step" style="padding-left:{{ it.padding }}px">{{ it.size }}px</span>
-      </div>
-    </div>
+<div ng-controller="DemoCtrl" class="md-padding dialogdemoBasicUsage" id="popupContainer" ng-cloak>
+  <div class="dialog-demo-content" layout="row" layout-wrap
+       layout-margin layout-align="center">
+    <md-button class="md-primary md-raised" ng-click="showAdvanced($event)">
+      Custom Dialog
+    </md-button>
   </div>
 
-  <!-- For this demo, include the font-faces needed by mdIcon above -->
-  <style>
-    @font-face {
-      font-family:"icomoon";
-      src:url("https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.eot");
-      font-weight:normal;
-      font-style:normal;
-    }
-
-    @font-face {
-      font-family: 'icomoon';
-      src:url('https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.eot?-cmq1um');
-      src:url('https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.eot?#iefix-cmq1um') format('embedded-opentype'),
-      url('https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.woff?-cmq1um') format('woff'),
-      url('https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.ttf?-cmq1um') format('truetype'),
-      url('https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.svg?-cmq1um#icomoon') format('svg');
-      font-weight: normal;
-      font-style: normal;
-    }
-  </style>
+  <script type="text/ng-template" id="dialog1.tmpl.html">
+    <md-dialog aria-label="Mango (Fruit)">
+      <form ng-cloak>
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2>Mango (Fruit)</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+              <md-icon md-svg-src="img/icons/ic_close_24px.svg"
+                       aria-label="Close dialog"></md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+        <md-dialog-content>
+          <!--<md-icon md-svg-src="img/icons/ic_close_24px.svg"></md-icon>-->
+          <md-icon md-svg-src="https://media.kavanu.co/appointmentTypes/1/48788ed2c4c044b49972fa0f69fda4ba.svg"></md-icon>
+        </md-dialog-content>
+      </form>
+    </md-dialog>
+  </script>
 </div>

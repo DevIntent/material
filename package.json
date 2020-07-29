@@ -47,7 +47,7 @@
     "angular-sanitize": "^1.8.0",
     "angular-touch": "^1.8.0",
     "angularytics": "^0.4.0",
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^9.8.5",
     "canonical-path": "^1.0.0",
     "cli-color": "^2.0.0",
     "colors": "^1.4.0",
@@ -95,7 +95,13 @@
     "prompt-sync": "^4.2.0",
     "q": "^1.5.1",
     "stream-series": "^0.1.1",
-    "through2": "^3.0.1"
+    "through2": "^3.0.1",
+    "webpack": "^4.44.0",
+    "webpack-cli": "^3.3.12",
+    "css-loader": "^4.1.0",
+    "style-loader": "^1.2.1",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^9.0.2"
   },
   "resolutions": {
     "graceful-fs": "^4.2.4",
@@ -105,6 +111,9 @@
   "scripts": {
     "build": "gulp build",
     "build:prod": "gulp build --release",
+    "webpack:clean": "rm dist/bundle.js",
+    "webpack:build:dev": "webpack -d --mode development",
+    "webpack:build:prod": "webpack -p --mode production",
     "build:modules": "gulp build-all-modules --release --mode=default",
     "build:closure": "gulp build-all-modules --release --mode=closure",
     "build:docs:prod": "gulp docs --release",
